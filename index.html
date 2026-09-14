@@ -6,30 +6,36 @@
   <title>TelePlay — Movie Trailers</title>
   <link rel="stylesheet" href="style.css">
   
-  <!-- Mobile 1 Row 3 Posters (Total 6) Display CSS -->
   <style>
-    /* Mobile Screen အတွက် Only 6 Items (2 Rows x 3 Items) သာပြရန် စည်းမျဉ်း */
+    /* Mobile Screen Styling */
     @media (max-width: 768px) {
-      .compact-grid {
+      /* Grid Layout: 1 Row လျှင် 3 Column (Slide မလုပ်ဘဲ Direct ပြရန်) */
+      .compact-grid-3, .compact-grid-6 {
         display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important; /* 1 Row 3 Columns */
+        grid-template-columns: repeat(3, 1fr) !important;
         gap: 8px !important;
+        overflow-x: hidden !important; /* Slide/Scroll လုပ်လို့မရအောင် ပိတ်ထားသည် */
       }
       
-      /* ၆ ခုထက် ပိုသော Items များကို Mobile တွင် ခေတ္တဖျောက်ထားမည် */
-      .compact-grid > *:nth-child(n+7) {
+      /* Trending နဲ့ Latest အတွက် စုစုပေါင်း ၃ ကားတိတိသာ ပြမည် (၄ ခုမြောက်မှစ၍ ဖျောက်မည်) */
+      .compact-grid-3 > *:nth-child(n+4) {
+        display: none !important;
+      }
+
+      /* Movies နဲ့ Series အတွက် စုစုပေါင်း ၆ ကား (၂ တန်း) ပြမည် (၇ ခုမြောက်မှစ၍ ဖျောက်မည်) */
+      .compact-grid-6 > *:nth-child(n+7) {
         display: none !important;
       }
       
-      /* Poster Image & Card များကို သပ်ရပ်စေရန် ချိန်ညှိခြင်း */
-      .compact-grid .card-poster, 
-      .compact-grid img {
+      /* Poster Card Styling များကို ညီညာအောင် ချိန်ညှိခြင်း */
+      .compact-grid-3 .card-poster, .compact-grid-6 .card-poster,
+      .compact-grid-3 img, .compact-grid-6 img {
         aspect-ratio: 2/3;
         width: 100%;
         object-fit: cover;
         border-radius: 6px;
       }
-      .compact-grid .card-title {
+      .compact-grid-3 .card-title, .compact-grid-6 .card-title {
         font-size: 0.75rem;
         line-height: 1.1;
         margin-top: 4px;
@@ -74,40 +80,40 @@
     </div>
   </section>
 
-  <!-- Trending Now Section (Compact Grid: Mobile မှာ ၃ ကား x ၂ တန်း = ၆ ကား) -->
+  <!-- Trending Now Section (Mobile တွင် 1 Row 3 ကား တိတိ) -->
   <section class="section">
     <div class="section-head">
       <h2><i>↗️</i> Trending Now</h2>
       <a href="movies.html?category=trending">View All ›</a>
     </div>
-    <div class="grid compact-grid" id="trendingRail"></div>
+    <div class="grid compact-grid-3" id="trendingRail"></div>
   </section>
 
-  <!-- Latest Update Section -->
+  <!-- Latest Update Section (Mobile တွင် 1 Row 3 ကား တိတိ) -->
   <section class="section" id="latest">
     <div class="section-head">
       <h2><i>▶️</i> Latest Update</h2>
       <a href="movies.html?category=latest">View All ›</a>
     </div>
-    <div class="grid compact-grid" id="latestRail"></div>
+    <div class="grid compact-grid-3" id="latestRail"></div>
   </section>
 
-  <!-- Movies Section -->
+  <!-- Movies Section (Mobile တွင် 2 Rows 6 ကား) -->
   <section class="section" id="movies">
     <div class="section-head">
       <h2><i>▣</i> Movies <small id="movieCount">0</small></h2>
       <a href="movies.html?category=movies">View All ›</a>
     </div>
-    <div class="grid compact-grid" id="movieGrid"></div>
+    <div class="grid compact-grid-6" id="movieGrid"></div>
   </section>
 
-  <!-- Series Section -->
+  <!-- Series Section (Mobile တွင် 2 Rows 6 ကား) -->
   <section class="section" id="series">
     <div class="section-head">
       <h2><i>▤</i> Series</h2>
       <a href="movies.html?category=series">View All ›</a>
     </div>
-    <div class="grid compact-grid" id="seriesGrid"></div>
+    <div class="grid compact-grid-6" id="seriesGrid"></div>
   </section>
 </main>
 
