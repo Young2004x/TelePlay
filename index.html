@@ -1,31 +1,129 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TelePlay — Movie Trailers</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TelePlay — Movie Trailers</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Mobile 1 Row 3 Posters (Total 6) Display CSS -->
+  <style>
+    /* Mobile Screen အတွက် Only 6 Items (2 Rows x 3 Items) သာပြရန် စည်းမျဉ်း */
+    @media (max-width: 768px) {
+      .compact-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important; /* 1 Row 3 Columns */
+        gap: 8px !important;
+      }
+      
+      /* ၆ ခုထက် ပိုသော Items များကို Mobile တွင် ခေတ္တဖျောက်ထားမည် */
+      .compact-grid > *:nth-child(n+7) {
+        display: none !important;
+      }
+      
+      /* Poster Image & Card များကို သပ်ရပ်စေရန် ချိန်ညှိခြင်း */
+      .compact-grid .card-poster, 
+      .compact-grid img {
+        aspect-ratio: 2/3;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+      .compact-grid .card-title {
+        font-size: 0.75rem;
+        line-height: 1.1;
+        margin-top: 4px;
+      }
+    }
+  </style>
 </head>
 <body>
+
 <header class="topbar">
-  <a class="brand" href="index.html"><span class="brand-mark">▶</span><span>Tele<span>Play</span></span></a>
-  <nav><a class="active" href="#home">Home</a><a href="#latest">Latest</a><a href="#movies">Movies</a><a href="#series">Series</a></nav>
+  <a class="brand" href="index.html"><span class="brand-mark">▶️</span><span>Tele<span>Play</span></span></a>
+  <nav>
+    <a class="active" href="#home">Home</a>
+    <a href="#latest">Latest</a>
+    <a href="#movies">Movies</a>
+    <a href="#series">Series</a>
+  </nav>
   <button class="search-btn" onclick="toggleSearch()">⌕</button>
 </header>
-<div id="searchBox" class="search-box"><input id="searchInput" type="search" placeholder="Search movies..." oninput="searchMovies(this.value)"></div>
+
+<div id="searchBox" class="search-box">
+  <input id="searchInput" type="search" placeholder="Search movies..." oninput="searchMovies(this.value)">
+</div>
 
 <main id="home">
-<section class="hero"><div class="hero-copy"><span class="eyebrow">TELEPLAY</span>
-<h1>Discover your next<br><b>movie obsession.</b></h1>
-<p>Movie trailers, Myanmar subtitles and useful movie information — all in one place.</p>
-<div class="hero-actions"><a class="btn primary" href="#movies">Browse Movies</a><a class="btn ghost" href="#latest">Latest Updates</a></div></div>
-<div class="hero-poster"><div class="poster-art featured"><span>TELEPLAY</span><strong>TRAILER<br>SPOTLIGHT</strong></div></div></section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">TELEPLAY</span>
+      <h1>Discover your next<br><b>movie obsession.</b></h1>
+      <p>Movie trailers, Myanmar subtitles and useful movie information — all in one place.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#movies">Browse Movies</a>
+        <a class="btn ghost" href="#latest">Latest Updates</a>
+      </div>
+    </div>
+    <div class="hero-poster">
+      <div class="poster-art featured">
+        <span>TELEPLAY</span>
+        <strong>TRAILER<br>SPOTLIGHT</strong>
+      </div>
+    </div>
+  </section>
 
-<section class="section"><div class="section-head"><h2><i>↗</i> Trending Now</h2><a href="#movies">View All ›</a></div><div class="rail" id="trendingRail"></div></section>
-<section class="section" id="latest"><div class="section-head"><h2><i>▶</i> Latest Update</h2><a href="#movies">View All ›</a></div><div class="rail" id="latestRail"></div></section>
-<section class="section" id="movies"><div class="section-head"><h2><i>▣</i> Movies <small id="movieCount">0</small></h2><a href="#movies">View All ›</a></div><div class="grid" id="movieGrid"></div></section>
-<section class="section" id="series"><div class="section-head"><h2><i>▤</i> Series</h2><a href="#series">View All ›</a></div><div class="grid" id="seriesGrid"></div></section>
+  <!-- Trending Now Section (Compact Grid: Mobile မှာ ၃ ကား x ၂ တန်း = ၆ ကား) -->
+  <section class="section">
+    <div class="section-head">
+      <h2><i>↗️</i> Trending Now</h2>
+      <a href="movies.html?category=trending">View All ›</a>
+    </div>
+    <div class="grid compact-grid" id="trendingRail"></div>
+  </section>
+
+  <!-- Latest Update Section -->
+  <section class="section" id="latest">
+    <div class="section-head">
+      <h2><i>▶️</i> Latest Update</h2>
+      <a href="movies.html?category=latest">View All ›</a>
+    </div>
+    <div class="grid compact-grid" id="latestRail"></div>
+  </section>
+
+  <!-- Movies Section -->
+  <section class="section" id="movies">
+    <div class="section-head">
+      <h2><i>▣</i> Movies <small id="movieCount">0</small></h2>
+      <a href="movies.html?category=movies">View All ›</a>
+    </div>
+    <div class="grid compact-grid" id="movieGrid"></div>
+  </section>
+
+  <!-- Series Section -->
+  <section class="section" id="series">
+    <div class="section-head">
+      <h2><i>▤</i> Series</h2>
+      <a href="movies.html?category=series">View All ›</a>
+    </div>
+    <div class="grid compact-grid" id="seriesGrid"></div>
+  </section>
 </main>
-<footer><div class="brand"><span class="brand-mark">▶</span><span>Tele<span>Play</span></span></div><p>Movie trailers & movie information.</p><div class="footer-links"><a href="#">Facebook</a><a href="#">Telegram</a><a href="admin.html">Admin</a></div></footer>
+
+<footer>
+  <div class="brand"><span class="brand-mark">▶️</span><span>Tele<span>Play</span></span></div>
+  <p>Movie trailers & movie information.</p>
+  <div class="footer-links">
+    <a href="#">Facebook</a>
+    <a href="#">Telegram</a>
+    <a href="admin.html">Admin</a>
+  </div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script><script src="app.js"></script>
-</body></html>
+<script src="supabase-config.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
