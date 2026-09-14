@@ -9,25 +9,25 @@
   <style>
     /* Mobile Screen Styling */
     @media (max-width: 768px) {
-      /* Grid Layout: 1 Row လျှင် 3 Column (Slide မလုပ်ဘဲ Direct ပြရန်) */
+      /* Grid Layout: Slide မလုပ်ဘဲ Direct ပြရန် */
       .compact-grid-3, .compact-grid-6 {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 8px !important;
-        overflow-x: hidden !important; /* Slide/Scroll လုပ်လို့မရအောင် ပိတ်ထားသည် */
+        overflow-x: hidden !important;
       }
       
-      /* Trending နဲ့ Latest အတွက် စုစုပေါင်း ၃ ကားတိတိသာ ပြမည် (၄ ခုမြောက်မှစ၍ ဖျောက်မည်) */
+      /* Trending နဲ့ Latest အတွက် စုစုပေါင်း ၃ ကားတိတိသာ ပြမည် */
       .compact-grid-3 > *:nth-child(n+4) {
         display: none !important;
       }
 
-      /* Movies နဲ့ Series အတွက် စုစုပေါင်း ၆ ကား (၂ တန်း) ပြမည် (၇ ခုမြောက်မှစ၍ ဖျောက်မည်) */
+      /* Movies နဲ့ Series အတွက် စုစုပေါင်း ၆ ကား ပြမည် */
       .compact-grid-6 > *:nth-child(n+7) {
         display: none !important;
       }
       
-      /* Poster Card Styling များကို ညီညာအောင် ချိန်ညှိခြင်း */
+      /* Poster Card Styling */
       .compact-grid-3 .card-poster, .compact-grid-6 .card-poster,
       .compact-grid-3 img, .compact-grid-6 img {
         aspect-ratio: 2/3;
@@ -35,10 +35,29 @@
         object-fit: cover;
         border-radius: 6px;
       }
+
       .compact-grid-3 .card-title, .compact-grid-6 .card-title {
         font-size: 0.75rem;
         line-height: 1.1;
         margin-top: 4px;
+      }
+
+      /* Badge အား Mobile တွင် ထပ်မသွားစေရန် ချိန်ညှိချက် */
+      .compact-grid-3 > *, .compact-grid-6 > *,
+      .card, .movie-card {
+        position: relative !important;
+      }
+
+      .badge, .quality-badge, .badge-1080p, [class*="badge"] {
+        position: absolute !important;
+        top: 4px !important;
+        right: 4px !important;
+        font-size: 0.55rem !important;
+        padding: 2px 4px !important;
+        border-radius: 3px !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+        z-index: 2 !important;
       }
     }
   </style>
@@ -80,7 +99,7 @@
     </div>
   </section>
 
-  <!-- Trending Now Section (Mobile တွင် 1 Row 3 ကား တိတိ) -->
+  <!-- Trending Now Section (1 Row 3 ကား) -->
   <section class="section">
     <div class="section-head">
       <h2><i>↗️</i> Trending Now</h2>
@@ -89,7 +108,7 @@
     <div class="grid compact-grid-3" id="trendingRail"></div>
   </section>
 
-  <!-- Latest Update Section (Mobile တွင် 1 Row 3 ကား တိတိ) -->
+  <!-- Latest Update Section (1 Row 3 ကား) -->
   <section class="section" id="latest">
     <div class="section-head">
       <h2><i>▶️</i> Latest Update</h2>
@@ -98,7 +117,7 @@
     <div class="grid compact-grid-3" id="latestRail"></div>
   </section>
 
-  <!-- Movies Section (Mobile တွင် 2 Rows 6 ကား) -->
+  <!-- Movies Section (2 Rows 6 ကား) -->
   <section class="section" id="movies">
     <div class="section-head">
       <h2><i>▣</i> Movies <small id="movieCount">0</small></h2>
@@ -107,7 +126,7 @@
     <div class="grid compact-grid-6" id="movieGrid"></div>
   </section>
 
-  <!-- Series Section (Mobile တွင် 2 Rows 6 ကား) -->
+  <!-- Series Section (2 Rows 6 ကား) -->
   <section class="section" id="series">
     <div class="section-head">
       <h2><i>▤</i> Series</h2>
